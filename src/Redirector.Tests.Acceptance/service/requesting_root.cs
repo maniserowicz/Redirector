@@ -1,5 +1,8 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
+using System.Web.Http.SelfHost;
 using Machine.Specifications;
+using Procent.Redirector.Configuration;
 
 namespace Procent.Redirector.Tests.Acceptance.service
 {
@@ -7,12 +10,21 @@ namespace Procent.Redirector.Tests.Acceptance.service
     {
         Establish ctx = () =>
             {
-                _httpClient = new HttpClient();
+                var address = new Uri("http://localhost:8355");
+                var config = new HttpSelfHostConfiguration(address);
+                WebApiBootstrap.Configure(config);
+
+                var server = new HttpSelfHostServer(config);
+
+                _httpClient = new HttpClient(server);
+                _httpClient.BaseAddress = address;
             };
 
-        Because of = () => _response = _httpClient.GetAsync("http://localhost:8355").Result;
+        Because of = () => _response = _httpClient.GetAsync("").Result;
 
         It returns_success_response = () => _response.IsSuccessStatusCode.ShouldBeTrue();
+
+        Cleanup stuff = () => _httpClient.Dispose();
 
         static HttpClient _httpClient;
         static HttpResponseMessage _response;
