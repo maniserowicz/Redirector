@@ -17,6 +17,16 @@ namespace Procent.Redirector.Configuration
                         action = "Index"
                     }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "redirection",
+                routeTemplate: "r/{alias}",
+                defaults: new
+                    {
+                        controller = "Redirect",
+                        action = "Redirect"
+                    }
+            );
         }
 
         /// <param name="store">Initialized <see cref="IDocumentStore"/> to use in application. If null, new default store will be created and initialized.</param>
