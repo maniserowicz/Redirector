@@ -13,7 +13,7 @@ namespace Procent.Redirector.Tests.Acceptance.service
                 var address = new Uri("http://localhost:8355");
                 var config = new HttpSelfHostConfiguration(address);
 
-                WebApiBootstrap.Configure(config);
+                Bootstraper.ConfigureWebApi(config);
 
                 var server = new HttpSelfHostServer(config);
 

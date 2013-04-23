@@ -1,7 +1,8 @@
 ﻿using Machine.Specifications;
 
-namespace Procent.Redirector.Tests.Acceptance.service
+namespace Procent.Redirector.Tests.Acceptance.service.environment
 {
+    [Subject("Environment check")]
     public class when_requesting_root
         : making_request
     {
