@@ -1,7 +1,7 @@
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Procent.Redirector
+namespace Procent.Redirector.API
 {
     public class RedirectController : ApiController
     {
