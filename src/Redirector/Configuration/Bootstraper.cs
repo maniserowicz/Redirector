@@ -1,4 +1,5 @@
 using System.Web.Http;
+using Procent.Redirector.Configuration.DI;
 using Raven.Client;
 using Raven.Client.Document;
 
@@ -27,6 +28,8 @@ namespace Procent.Redirector.Configuration
                         action = "Redirect"
                     }
             );
+
+            config.DependencyResolver = new SimpleContainer();
         }
 
         /// <param name="store">Initialized <see cref="IDocumentStore"/> to use in application. If null, new default store will be created and initialized.</param>

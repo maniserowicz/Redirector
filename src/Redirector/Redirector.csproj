@@ -61,6 +61,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\DI\SimpleContainer.cs" />
     <Compile Include="Configuration\RavenStore.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Link.cs" />

@@ -4,8 +4,8 @@ using Machine.Specifications;
 namespace Procent.Redirector.Tests.Acceptance.service
 {
     [Subject("API")]
-    public class when_requesting_nonexisting_link
-        : making_request
+    public class when_requesting_nonexisting_redirection
+        : using_db
     {
         Establish ctx = () => _url = "r/notexisting_link";
 

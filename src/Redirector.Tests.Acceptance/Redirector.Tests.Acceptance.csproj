@@ -72,8 +72,8 @@
     <Compile Include="service\contexts\making_request.cs" />
     <Compile Include="service\contexts\using_db.cs" />
     <Compile Include="service\environment\requesting_root.cs" />
-    <Compile Include="service\requesting_existing_link.cs" />
-    <Compile Include="service\requesting_nonexisting_link.cs" />
+    <Compile Include="service\redirections\when_requesting_existing_redirection.cs" />
+    <Compile Include="service\redirections\when_requesting_nonexisting_redirection.cs" />
     <Compile Include="app\posting_duplicate_link.cs" />
     <Compile Include="app\posting_new_link.cs" />
     <Compile Include="app\requesting_root.cs" />
