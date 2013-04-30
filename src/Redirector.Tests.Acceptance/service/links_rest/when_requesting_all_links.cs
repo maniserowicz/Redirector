@@ -9,31 +9,31 @@ namespace Procent.Redirector.Tests.Acceptance.service.links_rest
     {
         Establish ctx = () =>
             {
-                _url = "links";
+                url = "links";
 
-                _link1 = new Link
+                link1 = new Link
                 {
                     Alias = "first-link",
                     Target = "http://first-target.com/",
                 };
-                _link2 = new Link
+                link2 = new Link
                 {
                     Alias = "second-link",
                     Target = "http://second-target.com/",
                 };
 
-                using (var session = _store.OpenSession())
+                using (var session = store.OpenSession())
                 {
-                    session.Store(_link1);
-                    session.Store(_link2);
+                    session.Store(link1);
+                    session.Store(link2);
                     session.SaveChanges();
                 }
             };
 
-        It returns_all_links_from_database = () => JsonConvert.DeserializeObject<Link[]>(_response.Content.ReadAsStringAsync().Result)
-            .ShouldBeLike(new[] { _link1, _link2 });
+        It returns_all_links_from_database = () => JsonConvert.DeserializeObject<Link[]>(response.Content.ReadAsStringAsync().Result)
+            .ShouldBeLike(new[] { link1, link2 });
 
-        static Link _link1;
-        static Link _link2;
+        static Link link1;
+        static Link link2;
     }
 }

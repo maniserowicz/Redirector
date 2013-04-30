@@ -20,14 +20,12 @@ namespace Procent.Redirector.Configuration.DI
 
         public object GetService(Type serviceType)
         {
-            if (serviceType == typeof(RedirectController))
+            if (typeof (RedirectorControllerBase).IsAssignableFrom(serviceType))
             {
-                return new RedirectController(_openSession);
+                return Activator.CreateInstance(serviceType, _openSession);
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         public IEnumerable<object> GetServices(Type serviceType)

@@ -7,19 +7,17 @@ using System.Linq;
 
 namespace Procent.Redirector.API
 {
-    public class RedirectController : ApiController
+    public class RedirectController : RedirectorControllerBase
     {
-        private readonly Func<IDocumentSession> _session;
-
-        public RedirectController(Func<IDocumentSession> session)
+        public RedirectController(Func<IDocumentSession> newSession)
+            : base(newSession)
         {
-            _session = session;
         }
 
         [HttpGet]
         public HttpResponseMessage Redirect(string alias)
         {
-            using (var session = _session())
+            using (var session = _newSession())
             {
                 Link link = session.Query<Link>().FirstOrDefault(x => x.Alias == alias);
 

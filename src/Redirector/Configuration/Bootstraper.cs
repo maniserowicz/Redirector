@@ -10,6 +10,15 @@ namespace Procent.Redirector.Configuration
         public static void ConfigureWebApi(HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(
+                name: "default",
+                routeTemplate: "{controller}/{id}",
+                defaults: new
+                    {
+                        id = RouteParameter.Optional
+                    }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "web app root",
                 routeTemplate: "",
                 defaults: new

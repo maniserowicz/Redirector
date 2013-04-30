@@ -15,10 +15,10 @@ namespace Procent.Redirector.Tests.Acceptance.service
             {
                 ClearDatabase();
 
-                _store = new EmbeddableDocumentStore() { DataDirectory = db_path };
-                _store.Initialize();
+                store = new EmbeddableDocumentStore() { DataDirectory = db_path };
+                store.Initialize();
 
-                Bootstraper.ConfigureRaven(_store);
+                Bootstraper.ConfigureRaven(store);
             };
 
         private static void ClearDatabase()
@@ -32,8 +32,8 @@ namespace Procent.Redirector.Tests.Acceptance.service
             }
         }
 
-        Cleanup db = () => _store.Dispose();
+        Cleanup db = () => store.Dispose();
 
-        protected static IDocumentStore _store;
+        protected static IDocumentStore store;
     }
 }

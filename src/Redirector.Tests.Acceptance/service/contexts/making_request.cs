@@ -17,17 +17,17 @@ namespace Procent.Redirector.Tests.Acceptance.service
 
                 var server = new HttpSelfHostServer(config);
 
-                _httpClient = new HttpClient(server);
-                _httpClient.BaseAddress = address;
+                httpClient = new HttpClient(server);
+                httpClient.BaseAddress = address;
             };
 
-        Because of = () => _response = _httpClient.GetAsync(_url).Result;
+        Because of = () => response = httpClient.GetAsync(url).Result;
 
-        Cleanup client = () => _httpClient.Dispose();
+        Cleanup client = () => httpClient.Dispose();
 
-        static HttpClient _httpClient;
+        static HttpClient httpClient;
 
-        protected static string _url;
-        protected static HttpResponseMessage _response;
+        protected static string url;
+        protected static HttpResponseMessage response;
     }
 }

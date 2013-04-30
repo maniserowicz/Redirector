@@ -11,7 +11,7 @@ namespace Procent.Redirector.Tests.Acceptance.service
     {
         Establish ctx = () =>
         {
-            _url = "r/some-link";
+            url = "r/some-link";
 
             _link = new Link
                 {
@@ -20,16 +20,16 @@ namespace Procent.Redirector.Tests.Acceptance.service
                     Visits = new List<Visit>{new Visit{Occured = DateTime.UtcNow, Referrer = new Uri("http://some-referrer.com")}}
                 };
 
-            using (var session = _store.OpenSession())
+            using (var session = store.OpenSession())
             {
                 session.Store(_link);
                 session.SaveChanges();
             }
         };
 
-        It returns_redirect_response = () => _response.StatusCode.ShouldEqual(HttpStatusCode.Redirect);
+        It returns_redirect_response = () => response.StatusCode.ShouldEqual(HttpStatusCode.Redirect);
 
-        It redirects_to_link_target = () => _response.Headers.Location.AbsoluteUri.ShouldEqual(_link.Target);
+        It redirects_to_link_target = () => response.Headers.Location.AbsoluteUri.ShouldEqual(_link.Target);
 
         It saves_visit_in_db = () => _link_from_db.Visits.Count.ShouldEqual(2);
 
@@ -39,7 +39,7 @@ namespace Procent.Redirector.Tests.Acceptance.service
         {
             get
             {
-                using (var session = _store.OpenSession())
+                using (var session = store.OpenSession())
                 {
                     return session.Load<Link>(_link.Id);
                 }

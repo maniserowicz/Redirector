@@ -2,17 +2,14 @@
 using System.Net.Http;
 using Machine.Specifications;
 using Procent.Redirector.API;
-using Raven.Client.Embedded;
 
 namespace Procent.Redirector.Tests.API
 {
-    public abstract class requesting_link
+    public abstract class requesting_redirection
+        : using_db
     {
         Establish ctx = () =>
             {
-                _store = new EmbeddableDocumentStore() {RunInMemory = true};
-                _store.Initialize();
-
                 _controller = new RedirectController(() => _store.OpenSession());
                 _controller.Request = new HttpRequestMessage();
             };
@@ -22,11 +19,10 @@ namespace Procent.Redirector.Tests.API
         protected static RedirectController _controller;
         protected static string _alias;
         protected static HttpResponseMessage _response;
-        protected static EmbeddableDocumentStore _store;
     }
 
-    public abstract class requesting_existing_link
-        : requesting_link
+    public abstract class requesting_existing_redirection
+        : requesting_redirection
     {
         Establish ctx = () =>
             {
@@ -63,8 +59,8 @@ namespace Procent.Redirector.Tests.API
     }
 
     [Subject(typeof(RedirectController))]
-    public class when_requesting_existing_link_for_the_first_time
-        : requesting_existing_link
+    public class when_requesting_existing_redirection_for_the_first_time
+        : requesting_existing_redirection
     {
         Behaves_like<valid_redirection> valid_redirection;
 
@@ -72,8 +68,8 @@ namespace Procent.Redirector.Tests.API
     }
 
     [Subject(typeof(RedirectController))]
-    public class when_requesting_existing_link_for_nth_time
-        : requesting_existing_link
+    public class when_requesting_existing_redirection_for_nth_time
+        : requesting_existing_redirection
     {
         Establish ctx = () =>
         {
@@ -94,8 +90,8 @@ namespace Procent.Redirector.Tests.API
     }
 
     [Subject(typeof(RedirectController))]
-    public class when_requesting_nonexisting_link
-        : requesting_link
+    public class when_requesting_nonexisting_redirection
+        : requesting_redirection
     {
         Establish ctx = () => _alias = "nonexisting-link";
 

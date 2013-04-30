@@ -6,8 +6,8 @@ namespace Procent.Redirector.Tests.Acceptance.service.environment
     public class when_requesting_root
         : making_request
     {
-        Establish ctx = () => _url = "";
+        Establish ctx = () => url = "";
 
-        It returns_success_response = () => _response.IsSuccessStatusCode.ShouldBeTrue();
+        It returns_success_response = () => response.IsSuccessStatusCode.ShouldBeTrue();
     }
 }

@@ -63,7 +63,9 @@
   <ItemGroup>
     <Compile Include="Configuration\DI\SimpleContainer.cs" />
     <Compile Include="Configuration\RavenStore.cs" />
+    <Compile Include="Controllers\LinksController.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
+    <Compile Include="Controllers\RedirectorControllerBase.cs" />
     <Compile Include="Link.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\Bootstraper.cs" />
