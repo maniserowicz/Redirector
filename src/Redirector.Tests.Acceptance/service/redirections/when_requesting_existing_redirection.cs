@@ -13,7 +13,7 @@ namespace Procent.Redirector.Tests.Acceptance.service
         {
             url = "r/some-link";
 
-            _link = new Link
+            link = new Link
                 {
                     Alias = "some-link",
                     Target = "http://target-resource.com/",
@@ -22,26 +22,26 @@ namespace Procent.Redirector.Tests.Acceptance.service
 
             using (var session = store.OpenSession())
             {
-                session.Store(_link);
+                session.Store(link);
                 session.SaveChanges();
             }
         };
 
         It returns_redirect_response = () => response.StatusCode.ShouldEqual(HttpStatusCode.Redirect);
 
-        It redirects_to_link_target = () => response.Headers.Location.AbsoluteUri.ShouldEqual(_link.Target);
+        It redirects_to_link_target = () => response.Headers.Location.AbsoluteUri.ShouldEqual(link.Target);
 
-        It saves_visit_in_db = () => _link_from_db.Visits.Count.ShouldEqual(2);
+        It saves_visit_in_db = () => link_from_db.Visits.Count.ShouldEqual(2);
 
-        static Link _link;
+        static Link link;
 
-        static Link _link_from_db
+        static Link link_from_db
         {
             get
             {
                 using (var session = store.OpenSession())
                 {
-                    return session.Load<Link>(_link.Id);
+                    return session.Load<Link>(link.Id);
                 }
             }
         }

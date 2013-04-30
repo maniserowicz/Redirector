@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Machine.Specifications;
 using Procent.Redirector.Configuration;
 using Raven.Client;
@@ -35,5 +36,23 @@ namespace Procent.Redirector.Tests.Acceptance.service
         Cleanup db = () => store.Dispose();
 
         protected static IDocumentStore store;
+        protected static void use_db(Action<IDocumentSession> action)
+        {
+            using (var session = store.OpenSession())
+            {
+                action(session);
+            }
+        }
+        protected static T use_db<T>(Func<IDocumentSession, T> action)
+        {
+            T result = default(T);
+
+            use_db(s =>
+                {
+                    result = action(s);
+                });
+
+            return result;
+        }
     }
 }
