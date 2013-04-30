@@ -72,6 +72,7 @@
     <Compile Include="service\contexts\making_request.cs" />
     <Compile Include="service\contexts\using_db.cs" />
     <Compile Include="service\environment\requesting_root.cs" />
+    <Compile Include="service\links_rest\when_requesting_all_links.cs" />
     <Compile Include="service\redirections\when_requesting_existing_redirection.cs" />
     <Compile Include="service\redirections\when_requesting_nonexisting_redirection.cs" />
     <Compile Include="app\posting_duplicate_link.cs" />
@@ -86,6 +87,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
