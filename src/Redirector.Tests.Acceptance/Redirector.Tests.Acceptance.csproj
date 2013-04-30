@@ -76,8 +76,6 @@
     <Compile Include="service\links_rest\requesting_all_links.cs" />
     <Compile Include="service\redirections\when_requesting_existing_redirection.cs" />
     <Compile Include="service\redirections\when_requesting_nonexisting_redirection.cs" />
-    <Compile Include="app\posting_duplicate_link.cs" />
-    <Compile Include="app\posting_new_link.cs" />
     <Compile Include="app\requesting_root.cs" />
   </ItemGroup>
   <ItemGroup>
