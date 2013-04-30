@@ -10,7 +10,7 @@ namespace Procent.Redirector.Tests.API
     {
         Establish ctx = () =>
             {
-                _controller = new RedirectController(() => _store.OpenSession());
+                _controller = new RedirectController(() => store.OpenSession());
                 _controller.Request = new HttpRequestMessage();
             };
 
@@ -28,7 +28,7 @@ namespace Procent.Redirector.Tests.API
             {
                 _alias = "existing-link";
 
-                using (var session = _store.OpenSession())
+                using (var session = store.OpenSession())
                 {
                     _link = new Link { Alias = _alias, Target = "http://www.target.com/" };
                     session.Store(_link);
@@ -38,7 +38,7 @@ namespace Procent.Redirector.Tests.API
 
         protected static Link load_link()
         {
-            using (var session = _store.OpenSession())
+            using (var session = store.OpenSession())
             {
                 return session.Load<Link>(_link.Id);
             }
@@ -77,7 +77,7 @@ namespace Procent.Redirector.Tests.API
             link.Visits.Add(new Visit());
             link.Visits.Add(new Visit());
 
-            using (var session = _store.OpenSession())
+            using (var session = store.OpenSession())
             {
                 session.Store(link);
                 session.SaveChanges();

@@ -7,10 +7,12 @@ namespace Procent.Redirector.Tests.API
     {
         Establish ctx = () =>
         {
-            _store = new EmbeddableDocumentStore() { RunInMemory = true };
-            _store.Initialize();
+            store = new EmbeddableDocumentStore() { RunInMemory = true };
+            store.Initialize();
         };
 
-        protected static EmbeddableDocumentStore _store;
+        protected static EmbeddableDocumentStore store;
+
+        
     }
 }

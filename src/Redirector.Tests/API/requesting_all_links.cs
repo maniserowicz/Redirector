@@ -11,7 +11,7 @@ namespace Procent.Redirector.Tests.API
     {
         Establish ctx = () =>
             {
-                controller = new LinksController(() => _store.OpenSession());
+                controller = new LinksController(() => store.OpenSession());
                 controller.Request = new HttpRequestMessage();
             };
 
@@ -44,7 +44,7 @@ namespace Procent.Redirector.Tests.API
                             }
                     };
 
-                using (var session = _store.OpenSession())
+                using (var session = store.OpenSession())
                 {
                     session.Store(link1);
                     session.Store(link2);
