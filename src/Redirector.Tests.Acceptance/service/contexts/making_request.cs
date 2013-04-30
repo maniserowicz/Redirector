@@ -23,10 +23,6 @@ namespace Procent.Redirector.Tests.Acceptance.service
 
         Because of = () =>
             {
-                if (url != null && request != null)
-                {
-                    throw new InvalidOperationException("Cannot make request if both url and request objects are initialized; initialize only one of them depending on whether you're trying to issue a basic GET request or take full control over HTTP communication");
-                }
                 if (url != null)
                 {
                     response = httpClient.GetAsync(url).Result;
@@ -44,11 +40,14 @@ namespace Procent.Redirector.Tests.Acceptance.service
         /// <summary>
         /// initialize url in derived class to issue a basic http get request to a given address
         /// </summary>
-        protected static string url;
+        protected static string url { get { return _url; } set { _url = value; _request = null; } }
+        static string _url;
         /// <summary>
-        /// initialize request in derived class to take full control over http communication;
+        /// initialize request in derived class to take full control over http communication
         /// </summary>
-        protected static HttpRequestMessage request;
+        protected static HttpRequestMessage request { get { return _request; } set { _request = value; _url = null; } }
+        static HttpRequestMessage _request;
+
         protected static HttpResponseMessage response;
     }
 }

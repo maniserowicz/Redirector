@@ -12,7 +12,5 @@ namespace Procent.Redirector.Tests.API
         };
 
         protected static EmbeddableDocumentStore store;
-
-        
     }
 }

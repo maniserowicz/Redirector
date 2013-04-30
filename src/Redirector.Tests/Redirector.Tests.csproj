@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\contexts\using_db.cs" />
+    <Compile Include="API\adding_new_link.cs" />
     <Compile Include="API\requesting_all_links.cs" />
     <Compile Include="API\requesting_redirection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
