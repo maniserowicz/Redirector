@@ -49,7 +49,7 @@ namespace Procent.Redirector.Configuration
                 store = new DocumentStore() {ConnectionStringName = "links-db"};
                 store.Initialize();
             }
-
+            store.Conventions.IdentityPartsSeparator = "-";
             RavenStore.SetDocumentStore(store);
         }
     }
