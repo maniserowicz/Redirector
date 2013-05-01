@@ -70,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\Bootstraper.cs" />
     <Compile Include="Controllers\WebAppController.cs" />
+    <Compile Include="System\ApplicationTime.cs" />
     <Compile Include="Visit.cs" />
   </ItemGroup>
   <ItemGroup>

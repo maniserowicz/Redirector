@@ -26,7 +26,7 @@ namespace Procent.Redirector.API
 
                 link.Visits.Add(new Visit()
                     {
-                        Occured = DateTime.UtcNow,
+                        Occured = ApplicationTime.Current,
                         Referrer = Request.Headers.Referrer
                     });
 

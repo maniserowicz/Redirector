@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using Machine.Specifications;
 using Procent.Redirector.API;
+using System.Linq;
 
 namespace Procent.Redirector.Tests.API
 {
@@ -13,14 +14,20 @@ namespace Procent.Redirector.Tests.API
             {
                 controller = new RedirectController {NewSession = () => store.OpenSession()};
                 controller.Request = new HttpRequestMessage();
-                controller.Request.Headers.Referrer = new Uri("http://source.com");
+                controller.Request.Headers.Referrer = new Uri("http://source.com/");
+
+                requestTime = new DateTime(2012, 11, 28);
+                ApplicationTime._replaceCurrentTimeLogic(() => requestTime);
             };
 
         Because of = () => response = controller.Redirect(alias);
 
+        Cleanup date = () => ApplicationTime._revertToDefaultLogic();
+
         protected static RedirectController controller;
         protected static string alias;
         protected static HttpResponseMessage response;
+        protected static DateTime requestTime;
     }
 
     public abstract class requesting_existing_redirection
@@ -38,7 +45,7 @@ namespace Procent.Redirector.Tests.API
                 }
             };
 
-        protected static Link load_link()
+        public static Link load_link()
         {
             using (var session = store.OpenSession())
             {
@@ -56,12 +63,13 @@ namespace Procent.Redirector.Tests.API
 
         It redirects_to_target_url = () => response.Headers.Location.AbsoluteUri.ShouldEqual(link.Target);
 
-        It saves_referrer_in_visit;
+        It saves_referrer_in_visit = () => requesting_existing_redirection.load_link().Visits.Last().Referrer.AbsoluteUri.ShouldEqual("http://source.com/");
 
-        It saves_visit_time;
+        It saves_visit_time = () => requesting_existing_redirection.load_link().Visits.Last().Occured.ShouldEqual(requestTime);
 
         protected static HttpResponseMessage response;
         protected static Link link;
+        protected static DateTime requestTime;
     }
 
     [Subject(typeof(RedirectController))]
