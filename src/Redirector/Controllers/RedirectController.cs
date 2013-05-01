@@ -2,22 +2,16 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Raven.Client;
 using System.Linq;
 
 namespace Procent.Redirector.API
 {
     public class RedirectController : RedirectorControllerBase
     {
-        public RedirectController(Func<IDocumentSession> newSession)
-            : base(newSession)
-        {
-        }
-
         [HttpGet]
         public HttpResponseMessage Redirect(string alias)
         {
-            using (var session = _newSession())
+            using (var session = NewSession())
             {
                 Link link = session.Query<Link>().FirstOrDefault(x => x.Alias == alias);
 

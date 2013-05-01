@@ -10,7 +10,7 @@ namespace Procent.Redirector.Tests.API
     {
         Establish ctx = () =>
             {
-                _controller = new RedirectController(() => store.OpenSession());
+                _controller = new RedirectController {NewSession = () => store.OpenSession()};
                 _controller.Request = new HttpRequestMessage();
             };
 

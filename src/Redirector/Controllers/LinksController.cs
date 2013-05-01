@@ -3,20 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using Raven.Client;
 
 namespace Procent.Redirector.API
 {
     public class LinksController : RedirectorControllerBase
     {
-        public LinksController(Func<IDocumentSession> newSession)
-            : base(newSession)
-        {
-        }
-
         public IEnumerable<Link> Get()
         {
-            using (var session = _newSession())
+            using (var session = NewSession())
             {
                 return session.Query<Link>().ToList();
             }
@@ -24,7 +18,7 @@ namespace Procent.Redirector.API
 
         public HttpResponseMessage Post(Link link)
         {
-            using (var session = _newSession())
+            using (var session = NewSession())
             {
                 if (session.Query<Link>().Any(x => x.Alias == link.Alias))
                 {

@@ -18,7 +18,7 @@ namespace Procent.Redirector.Tests.API
                 Target = "http://new-target.com/",
             };
 
-            controller = new LinksController(() => store.OpenSession());
+            controller = new LinksController { NewSession = () => store.OpenSession() };
             controller.Request = new HttpRequestMessage
                 {
                     RequestUri = new Uri("http://myservice/links/")

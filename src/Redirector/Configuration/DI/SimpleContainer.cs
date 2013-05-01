@@ -22,7 +22,9 @@ namespace Procent.Redirector.Configuration.DI
         {
             if (typeof (RedirectorControllerBase).IsAssignableFrom(serviceType))
             {
-                return Activator.CreateInstance(serviceType, _openSession);
+                var controller = (RedirectorControllerBase)Activator.CreateInstance(serviceType);
+                controller.NewSession = _openSession;
+                return controller;
             }
 
             return null;
