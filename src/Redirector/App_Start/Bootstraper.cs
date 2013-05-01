@@ -2,6 +2,7 @@ using System.Web.Http;
 using Procent.Redirector.Configuration.DI;
 using Raven.Client;
 using Raven.Client.Document;
+using Raven.Client.Embedded;
 
 namespace Procent.Redirector.Configuration
 {
@@ -30,7 +31,7 @@ namespace Procent.Redirector.Configuration
             );
 
             config.Routes.MapHttpRoute(
-                name: "default",
+                name: "default api",
                 routeTemplate: "{controller}/{id}",
                 defaults: new
                 {
@@ -46,7 +47,7 @@ namespace Procent.Redirector.Configuration
         {
             if (store == null)
             {
-                store = new DocumentStore() {ConnectionStringName = "links-db"};
+                store = new EmbeddableDocumentStore {ConnectionStringName = "links-db"};
                 store.Initialize();
             }
             store.Conventions.IdentityPartsSeparator = "-";
