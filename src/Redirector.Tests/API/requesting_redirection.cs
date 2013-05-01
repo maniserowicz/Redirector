@@ -54,6 +54,10 @@ namespace Procent.Redirector.Tests.API
 
         It redirects_to_target_url = () => _response.Headers.Location.AbsoluteUri.ShouldEqual(_link.Target);
 
+        It saves_referrer_in_visit;
+
+        It saves_visit_time;
+
         protected static HttpResponseMessage _response;
         protected static Link _link;
     }
