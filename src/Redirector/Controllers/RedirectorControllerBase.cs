@@ -4,7 +4,7 @@ using Raven.Client;
 
 namespace Procent.Redirector.API
 {
-    public class RedirectorControllerBase : ApiController
+    public abstract class RedirectorControllerBase : ApiController
     {
         public Func<IDocumentSession> NewSession;
     }
