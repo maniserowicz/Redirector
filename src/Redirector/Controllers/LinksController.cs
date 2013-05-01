@@ -30,7 +30,12 @@ namespace Procent.Redirector.API
             }
 
             var response = Request.CreateResponse(HttpStatusCode.Created);
-            response.Headers.Location = new Uri(Request.RequestUri + link.Id);
+            string requestUri = Request.RequestUri.AbsoluteUri;
+            if (false == requestUri.EndsWith("/"))
+            {
+                requestUri += "/";
+            }
+            response.Headers.Location = new Uri(requestUri + link.Id);
 
             return response;
         }

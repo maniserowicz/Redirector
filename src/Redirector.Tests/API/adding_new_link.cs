@@ -42,7 +42,7 @@ namespace Procent.Redirector.Tests.API
 
         It returns_new_resource_url_in_header = () => response.Headers.Location.AbsoluteUri.ShouldEqual("http://myservice/links/" + new_link_from_db.Id);
 
-        static Link new_link_from_db
+        protected static Link new_link_from_db
         {
             get
             {
@@ -53,6 +53,15 @@ namespace Procent.Redirector.Tests.API
                 }
             }
         }
+    }
+
+    [Subject(typeof(LinksController))]
+    public class when_adding_new_link_after_issuing_request_without_trailing_slash
+        : when_adding_new_link_with_unique_alias
+    {
+        Establish ctx = () => controller.Request.RequestUri = new Uri("http://myservice/noslash");
+
+        It returns_new_resource_url_in_header = () => response.Headers.Location.AbsoluteUri.ShouldEqual("http://myservice/noslash/" + new_link_from_db.Id);
     }
 
     [Subject(typeof(LinksController))]
