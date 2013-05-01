@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using Machine.Specifications;
 using Procent.Redirector.API;
@@ -10,15 +11,16 @@ namespace Procent.Redirector.Tests.API
     {
         Establish ctx = () =>
             {
-                _controller = new RedirectController {NewSession = () => store.OpenSession()};
-                _controller.Request = new HttpRequestMessage();
+                controller = new RedirectController {NewSession = () => store.OpenSession()};
+                controller.Request = new HttpRequestMessage();
+                controller.Request.Headers.Referrer = new Uri("http://source.com");
             };
 
-        Because of = () => _response = _controller.Redirect(_alias);
+        Because of = () => response = controller.Redirect(alias);
 
-        protected static RedirectController _controller;
-        protected static string _alias;
-        protected static HttpResponseMessage _response;
+        protected static RedirectController controller;
+        protected static string alias;
+        protected static HttpResponseMessage response;
     }
 
     public abstract class requesting_existing_redirection
@@ -26,12 +28,12 @@ namespace Procent.Redirector.Tests.API
     {
         Establish ctx = () =>
             {
-                _alias = "existing-link";
+                alias = "existing-link";
 
                 using (var session = store.OpenSession())
                 {
-                    _link = new Link { Alias = _alias, Target = "http://www.target.com/" };
-                    session.Store(_link);
+                    link = new Link { Alias = alias, Target = "http://www.target.com/" };
+                    session.Store(link);
                     session.SaveChanges();
                 }
             };
@@ -40,26 +42,26 @@ namespace Procent.Redirector.Tests.API
         {
             using (var session = store.OpenSession())
             {
-                return session.Load<Link>(_link.Id);
+                return session.Load<Link>(link.Id);
             }
         }
 
-        protected static Link _link;
+        protected static Link link;
     }
 
     [Behaviors]
     public class valid_redirection
     {
-        It returns_redirect = () => _response.StatusCode.ShouldEqual(HttpStatusCode.Redirect);
+        It returns_redirect = () => response.StatusCode.ShouldEqual(HttpStatusCode.Redirect);
 
-        It redirects_to_target_url = () => _response.Headers.Location.AbsoluteUri.ShouldEqual(_link.Target);
+        It redirects_to_target_url = () => response.Headers.Location.AbsoluteUri.ShouldEqual(link.Target);
 
         It saves_referrer_in_visit;
 
         It saves_visit_time;
 
-        protected static HttpResponseMessage _response;
-        protected static Link _link;
+        protected static HttpResponseMessage response;
+        protected static Link link;
     }
 
     [Subject(typeof(RedirectController))]
@@ -97,8 +99,8 @@ namespace Procent.Redirector.Tests.API
     public class when_requesting_nonexisting_redirection
         : requesting_redirection
     {
-        Establish ctx = () => _alias = "nonexisting-link";
+        Establish ctx = () => alias = "nonexisting-link";
 
-        It returns_not_found = () => _response.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
+        It returns_not_found = () => response.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
     }
 }
