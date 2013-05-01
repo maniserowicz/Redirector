@@ -1,6 +1,8 @@
 #####################
 # Project-specific
 #####################
+src/Redirector/local.config
+src/Redirector/App_Data/
 
 #####################
 # Visual Studio
