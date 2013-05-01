@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using System.Web.Mvc;
-using System.Web.Routing;
 using Procent.Redirector.Configuration;
 
 namespace Procent.Redirector
@@ -12,7 +11,6 @@ namespace Procent.Redirector
             AreaRegistration.RegisterAllAreas();
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             Bootstraper.ConfigureWebApi(GlobalConfiguration.Configuration);
 
