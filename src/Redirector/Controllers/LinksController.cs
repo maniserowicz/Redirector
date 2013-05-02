@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web.Http;
 
 namespace Procent.Redirector.API
 {
@@ -38,6 +39,21 @@ namespace Procent.Redirector.API
             response.Headers.Location = new Uri(requestUri + link.Id);
 
             return response;
+        }
+
+        public Link Get(string id)
+        {
+            using (var session = NewSession())
+            {
+                var link = session.Load<Link>(id);
+
+                if (link == null)
+                {
+                    throw new HttpResponseException(HttpStatusCode.NotFound);
+                }
+
+                return link;
+            }
         }
     }
 }
