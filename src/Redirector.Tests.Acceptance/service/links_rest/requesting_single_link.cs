@@ -49,8 +49,7 @@ namespace Procent.Redirector.Tests.Acceptance.service.links_rest
                 url = "links/" + link.Id;
             };
 
-        It returns_link_from_database = () => DeserializedResponse.ShouldBeLike(link);
-
+        It returns_link_from_database = () => response.DeserializeAsJson<Link>().ShouldBeLike(link);
 
         static Link DeserializedResponse
         {

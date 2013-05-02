@@ -30,8 +30,7 @@ namespace Procent.Redirector.Tests.Acceptance.service.links_rest
                 }
             };
 
-        It returns_all_links_from_database = () => JsonConvert.DeserializeObject<Link[]>(response.Content.ReadAsStringAsync().Result)
-            .ShouldBeLike(new[] { link1, link2 });
+        It returns_all_links_from_database = () => response.DeserializeAsJson<Link[]>().ShouldBeLike(new[] { link1, link2 });
 
         static Link link1;
         static Link link2;

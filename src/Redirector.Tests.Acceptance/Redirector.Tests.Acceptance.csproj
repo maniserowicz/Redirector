@@ -78,13 +78,12 @@
     <Compile Include="service\redirections\when_requesting_existing_redirection.cs" />
     <Compile Include="service\redirections\when_requesting_nonexisting_redirection.cs" />
     <Compile Include="app\requesting_root.cs" />
+    <Compile Include="_Utils\HttpResponseExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="_Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Redirector\Redirector.csproj">
       <Project>{85ca8916-9e77-4ea8-91e6-e6ec8991ef16}</Project>
