@@ -19,6 +19,9 @@
                 $scope.clearNew();
                 $scope.hideNew();
                 $scope.fetchLinks();
+            })
+            .error(function(exc) {
+                alert(exc.Message);
             });
     };
     $scope.clearNew = function() {
