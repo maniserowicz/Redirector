@@ -1,12 +1,18 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html ng-app>
 <head>
     <title>Redirector</title>
 </head>
-<body>
-    <div>
-        Hello
-    </div>
-</body>
+    <body>
+        <div ng-controller="LinksCtrl">
+            <p>Currently there are {{links.length}} links defined.</p>
+            <ul>
+                <li ng-repeat="link in links"><a href="{{link.Target}}">{{link.Alias}}</a></li>
+            </ul>
+        </div>
+    </body>
+    <script src="~/Scripts/jquery-2.0.0.min.js"></script>
+    <script src="/Scripts/angular.js"></script>
+    <script src="~/Scripts/app/home.js"></script>
 </html>
