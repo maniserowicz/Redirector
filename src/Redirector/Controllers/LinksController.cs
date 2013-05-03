@@ -41,6 +41,11 @@ namespace Procent.Redirector.API
 
         public HttpResponseMessage Post(link_write_model link)
         {
+            if (ModelState.IsValid == false)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
             var newLink = link.MapToLink();
 
             using (var session = NewSession())
