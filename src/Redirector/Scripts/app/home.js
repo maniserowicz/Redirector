@@ -42,7 +42,7 @@
         $scope.current = null;
     };
     $scope.dateString = function(visit) {
-        return new Date(visit.Occured).toUTCString();
+        return new Date(visit.occured).toUTCString();
     };
     
     $scope.fetchLinks();

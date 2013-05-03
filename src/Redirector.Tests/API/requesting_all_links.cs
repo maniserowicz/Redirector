@@ -18,7 +18,7 @@ namespace Procent.Redirector.Tests.API
         Because of = () => links = controller.Get();
 
         protected static LinksController controller;
-        protected static IEnumerable<Link> links;
+        protected static IEnumerable<LinksController.link_read_model> links;
     }
 
     [Subject(typeof(LinksController))]
@@ -51,12 +51,12 @@ namespace Procent.Redirector.Tests.API
                     session.SaveChanges();
                 }
 
-                existing_links = new[] {link1, link2};
+                existing_links = new[] { LinksController.link_read_model.MapFrom(link1), LinksController.link_read_model.MapFrom(link2)};
             };
 
         It returns_all_defined_links = () => links.ShouldBeLike(existing_links);
 
-        static IEnumerable<Link> existing_links;
+        static IEnumerable<LinksController.link_read_model> existing_links;
     }
 
     [Subject(typeof(LinksController))]

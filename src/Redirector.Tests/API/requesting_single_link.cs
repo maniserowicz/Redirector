@@ -12,7 +12,7 @@ namespace Procent.Redirector.Tests.API
     {
         Establish ctx = () =>
         {
-            link = new Link
+            var singleLink = new Link
             {
                 Alias = "link-alias",
                 Target = "http://target.com/",
@@ -33,10 +33,11 @@ namespace Procent.Redirector.Tests.API
 
             using (var session = store.OpenSession())
             {
-                session.Store(link);
+                session.Store(singleLink);
                 session.SaveChanges();
             }
 
+            link = LinksController.link_details_read_model.MapFrom(singleLink);
             controller = new LinksController() {NewSession = store.OpenSession};
         };
 
@@ -54,9 +55,9 @@ namespace Procent.Redirector.Tests.API
 
         static LinksController controller;
 
-        protected static Link link;
+        protected static LinksController.link_details_read_model link;
         protected static string requested_link_id;
-        protected static Link returned_link;
+        protected static LinksController.link_details_read_model returned_link;
         protected static HttpResponseException error;
     }
 
@@ -66,12 +67,12 @@ namespace Procent.Redirector.Tests.API
     {
         Establish ctx = () =>
         {
-            requested_link_id = link.Id;
+            requested_link_id = link.id;
         };
 
         It returns_link_from_database = () => returned_link.ShouldBeLike(link);
 
-        It returns_visits_along_with_link = () => returned_link.Visits.Count.ShouldEqual(2);
+        It returns_visits_along_with_link = () => returned_link.visits.Length.ShouldEqual(2);
     }
 
     [Subject(typeof(LinksController))]

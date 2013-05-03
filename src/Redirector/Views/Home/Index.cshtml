@@ -15,11 +15,11 @@
             <form name="newLinkForm" ng-show="addingNew">
                 <p>add new link:</p>
                 <p>
-                    alias: <input type="text" name="alias" ng-model="newLink.Alias" required/>
+                    alias: <input type="text" name="alias" ng-model="newLink.alias" required/>
                     <span ng-show="newLinkForm.alias.$error.required">*</span>
                 </p>
                 <p>
-                    target: <input type="url" name="target" ng-model="newLink.Target" required/>
+                    target: <input type="url" name="target" ng-model="newLink.target" required/>
                     <span ng-show="newLinkForm.target.$error.required">*</span>
                     <span ng-show="newLinkForm.target.$error.url">invalid url</span>
                 </p>
@@ -27,18 +27,18 @@
                 <button ng-click="clearNew()">Clear</button>
             </form>
             <ul>
-                <li ng-repeat="link in links"><a href="#" ng-click="details(link, $event)">{{link.Alias}}</a> ({{link.Visits.length}} visits) [<a href="#" ng-click="delete(link.Id, $event)">x</a>]
-                    (<a target="_blank" href="r/{{link.Alias}}" ng-click="fetchLinks_delayed()">visit</a>)
-                    (<a target="_blank" href="{{link.Target}}">open target</a>)
+                <li ng-repeat="link in links"><a href="#" ng-click="details(link, $event)">{{link.alias}}</a> ({{link.visitsCount}} visits) [<a href="#" ng-click="delete(link.id, $event)">x</a>]
+                    (<a target="_blank" href="r/{{link.alias}}" ng-click="fetchLinks_delayed()">visit</a>)
+                    (<a target="_blank" href="{{link.target}}">open target</a>)
                 </li>
             </ul>
             <div ng-show="current">
                 <h3>Link details <button ng-click="closeDetails()">close</button></h3>
-                <p>Alias: {{current.Alias}}</p>
-                <p>Target: {{current.Target}}</p>
-                <p>Visist ({{current.Visits.length}}):</p>
+                <p>Alias: {{current.alias}}</p>
+                <p>Target: {{current.target}}</p>
+                <p>Visits ({{current.visits.length}}):</p>
                 <ul>
-                    <li ng-repeat="visit in current.Visits">{{dateString(visit)}} from {{visit.Referrer}}</li>
+                    <li ng-repeat="visit in current.visits">{{dateString(visit)}} from {{visit.referrer}}</li>
                 </ul>
             </div>
         </div>

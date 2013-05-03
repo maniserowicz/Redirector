@@ -12,10 +12,10 @@ namespace Procent.Redirector.Tests.API
     {
         Establish ctx = () =>
         {
-            newLink = new Link
+            newLink = new LinksController.link_write_model
             {
-                Alias = "new-link",
-                Target = "http://new-target.com/",
+                alias = "new-link",
+                target = "http://new-target.com/",
             };
 
             controller = new LinksController { NewSession = () => store.OpenSession() };
@@ -27,7 +27,7 @@ namespace Procent.Redirector.Tests.API
 
         Because of = () => response = controller.Post(newLink);
 
-        protected static Link newLink;
+        protected static LinksController.link_write_model newLink;
         protected static LinksController controller;
         protected static HttpResponseMessage response;
     }
@@ -49,7 +49,7 @@ namespace Procent.Redirector.Tests.API
                 using (var session = store.OpenSession())
                 {
                     return session.Query<Link>()
-                        .FirstOrDefault(x => x.Alias == newLink.Alias && x.Target == newLink.Target);
+                        .FirstOrDefault(x => x.Alias == newLink.alias && x.Target == newLink.target);
                 }
             }
         }
@@ -74,7 +74,7 @@ namespace Procent.Redirector.Tests.API
                 {
                     session.Store(new Link
                         {
-                            Alias = newLink.Alias
+                            Alias = newLink.alias
                         });
                     session.SaveChanges();
                 }
