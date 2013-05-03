@@ -1,6 +1,11 @@
-﻿function LinksCtrl($scope) {
-    $scope.links = [
-        { Alias: 'google', Target: 'http://www.google.com' },
-        { Alias: 'youtube', Target: 'http://www.youtube.com'}
-    ];
+﻿function LinksCtrl($scope, $http) {
+    $scope.fetchLinks = function() {
+        $http.get('links').success(function (data) {
+            $scope.links = data;
+        });
+    };
+    $scope.new = function() {
+        alert('not implemented');
+    };
+    $scope.fetchLinks();
 }
