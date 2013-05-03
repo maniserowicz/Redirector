@@ -36,7 +36,9 @@
     };
     $scope.details = function (link, evt) {
         evt.preventDefault();
-        $scope.current = link;
+        $http.get('links/' + link.id).success(function(data) {
+            $scope.current = data;
+        });
     };
     $scope.closeDetails = function() {
         $scope.current = null;
