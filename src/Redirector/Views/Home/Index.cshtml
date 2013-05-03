@@ -8,9 +8,13 @@
         <div ng-controller="LinksCtrl">
             <p>Currently there are {{links.length}} links defined.</p>
             <p>Actions:
-                <input type="button" value="Add new link" ng-click="new()"/>
+                <input type="button" value="Add new link" ng-click="new()" ng-show="!addingNew"/>
+                <input type="button" value="(hide new form)" ng-click="hideNew()" ng-show="addingNew"/>
                 <input type="button" value="Refresh" ng-click="fetchLinks()"/>
             </p>
+            <form name="newLinkForm" ng-show="addingNew">
+                add new link
+            </form>
             <ul>
                 <li ng-repeat="link in links">{{link.Alias}} ({{link.Visits.length}} visits) (<a target="_blank" href="r/{{link.Alias}}">visit</a>) (<a target="_blank" href="{{link.Target}}">open target</a>)</li>
             </ul>

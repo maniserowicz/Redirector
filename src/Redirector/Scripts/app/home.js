@@ -4,8 +4,11 @@
             $scope.links = data;
         });
     };
-    $scope.new = function() {
-        alert('not implemented');
+    $scope.new = function () {
+        $scope.addingNew = true;
+    };
+    $scope.hideNew = function() {
+        $scope.addingNew = false;
     };
     $scope.fetchLinks();
 }
