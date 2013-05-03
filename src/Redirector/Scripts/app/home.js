@@ -18,7 +18,7 @@
             .success(function() {
                 $scope.clearNew();
                 $scope.hideNew();
-                $scope.fetchLinks();
+                $timeout($scope.fetchLinks, 500);
             })
             .error(function(exc) {
                 alert(exc.Message);
