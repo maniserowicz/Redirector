@@ -15,15 +15,16 @@
             <form name="newLinkForm" ng-show="addingNew">
                 <p>add new link:</p>
                 <p>
-                    alias: <input type="text" name="alias" ng-model="newAlias" required/>
+                    alias: <input type="text" name="alias" ng-model="newLink.Alias" required/>
                     <span ng-show="newLinkForm.alias.$error.required">*</span>
                 </p>
                 <p>
-                    target: <input type="url" name="target" ng-model="newTarget" required/>
+                    target: <input type="url" name="target" ng-model="newLink.Target" required/>
                     <span ng-show="newLinkForm.target.$error.required">*</span>
                     <span ng-show="newLinkForm.target.$error.url">invalid url</span>
                 </p>
                 <button ng-click="save()" ng-disabled="newLinkForm.$invalid">Save</button>
+                <button ng-click="clearNew()">Clear</button>
             </form>
             <ul>
                 <li ng-repeat="link in links">{{link.Alias}} ({{link.Visits.length}} visits) (<a target="_blank" href="r/{{link.Alias}}">visit</a>) (<a target="_blank" href="{{link.Target}}">open target</a>)</li>

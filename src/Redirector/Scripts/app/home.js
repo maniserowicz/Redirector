@@ -10,8 +10,17 @@
     $scope.hideNew = function() {
         $scope.addingNew = false;
     };
-    $scope.save = function() {
-        alert('not implemented');
+    $scope.save = function () {
+        $http.post('links', $scope.newLink)
+            .success(function() {
+                $scope.clearNew();
+                $scope.hideNew();
+                $scope.fetchLinks();
+            });
     };
+    $scope.clearNew = function() {
+        $scope.newLink = null;
+    };
+    
     $scope.fetchLinks();
 }
