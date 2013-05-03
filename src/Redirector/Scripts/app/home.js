@@ -34,6 +34,16 @@
                 .success($scope.fetchLinks);
         }
     };
+    $scope.details = function (link, evt) {
+        evt.preventDefault();
+        $scope.current = link;
+    };
+    $scope.closeDetails = function() {
+        $scope.current = null;
+    };
+    $scope.dateString = function(visit) {
+        return new Date(visit.Occured).toUTCString();
+    };
     
     $scope.fetchLinks();
 }
