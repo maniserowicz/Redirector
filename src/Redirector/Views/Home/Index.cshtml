@@ -8,12 +8,22 @@
         <div ng-controller="LinksCtrl">
             <p>Currently there are {{links.length}} links defined.</p>
             <p>Actions:
-                <input type="button" value="Add new link" ng-click="new()" ng-show="!addingNew"/>
-                <input type="button" value="(hide new form)" ng-click="hideNew()" ng-show="addingNew"/>
-                <input type="button" value="Refresh" ng-click="fetchLinks()"/>
+                <button ng-click="new()" ng-show="!addingNew">Add new link</button>
+                <button ng-click="hideNew()" ng-show="addingNew">(hide new form)</button>
+                <button ng-click="fetchLinks()">Refresh</button>
             </p>
             <form name="newLinkForm" ng-show="addingNew">
-                add new link
+                <p>add new link:</p>
+                <p>
+                    alias: <input type="text" name="alias" ng-model="newAlias" required/>
+                    <span ng-show="newLinkForm.alias.$error.required">*</span>
+                </p>
+                <p>
+                    target: <input type="url" name="target" ng-model="newTarget" required/>
+                    <span ng-show="newLinkForm.target.$error.required">*</span>
+                    <span ng-show="newLinkForm.target.$error.url">invalid url</span>
+                </p>
+                <button ng-click="save()" ng-disabled="newLinkForm.$invalid">Save</button>
             </form>
             <ul>
                 <li ng-repeat="link in links">{{link.Alias}} ({{link.Visits.length}} visits) (<a target="_blank" href="r/{{link.Alias}}">visit</a>) (<a target="_blank" href="{{link.Target}}">open target</a>)</li>

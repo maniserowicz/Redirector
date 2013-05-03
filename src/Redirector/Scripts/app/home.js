@@ -10,5 +10,8 @@
     $scope.hideNew = function() {
         $scope.addingNew = false;
     };
+    $scope.save = function() {
+        alert('not implemented');
+    };
     $scope.fetchLinks();
 }
