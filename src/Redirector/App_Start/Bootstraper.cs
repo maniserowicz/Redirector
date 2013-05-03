@@ -1,7 +1,6 @@
 using System.Web.Http;
 using Procent.Redirector.Configuration.DI;
 using Raven.Client;
-using Raven.Client.Document;
 using Raven.Client.Embedded;
 
 namespace Procent.Redirector.Configuration
@@ -10,16 +9,6 @@ namespace Procent.Redirector.Configuration
     {
         public static void ConfigureWebApi(HttpConfiguration config)
         {
-            config.Routes.MapHttpRoute(
-                name: "web app root",
-                routeTemplate: "",
-                defaults: new
-                    {
-                        controller = "WebApp",
-                        action = "Index"
-                    }
-            );
-
             config.Routes.MapHttpRoute(
                 name: "redirection",
                 routeTemplate: "r/{alias}",

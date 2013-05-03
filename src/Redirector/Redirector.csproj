@@ -119,10 +119,11 @@
     <Compile Include="App_Start\Bootstraper.cs" />
     <Compile Include="App_Start\DI\SimpleContainer.cs" />
     <Compile Include="App_Start\RavenStore.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinksController.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Controllers\RedirectorControllerBase.cs" />
-    <Compile Include="Controllers\WebAppController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -148,6 +149,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

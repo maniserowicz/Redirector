@@ -71,13 +71,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="service\contexts\making_request.cs" />
     <Compile Include="service\contexts\using_db.cs" />
-    <Compile Include="service\environment\requesting_root.cs" />
+    <Compile Include="service\environment\when_requesting_api_root.cs" />
     <Compile Include="service\links_rest\adding_new_link.cs" />
     <Compile Include="service\links_rest\requesting_all_links.cs" />
     <Compile Include="service\links_rest\requesting_single_link.cs" />
     <Compile Include="service\redirections\when_requesting_existing_redirection.cs" />
     <Compile Include="service\redirections\when_requesting_nonexisting_redirection.cs" />
-    <Compile Include="app\requesting_root.cs" />
     <Compile Include="_Utils\HttpResponseExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
