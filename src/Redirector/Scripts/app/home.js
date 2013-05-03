@@ -1,8 +1,11 @@
-﻿function LinksCtrl($scope, $http) {
+﻿function LinksCtrl($scope, $http, $timeout) {
     $scope.fetchLinks = function() {
         $http.get('links').success(function (data) {
             $scope.links = data;
         });
+    };
+    $scope.fetchLinks_delayed = function () {
+        $timeout($scope.fetchLinks, 300);
     };
     $scope.new = function () {
         $scope.addingNew = true;
