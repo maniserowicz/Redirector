@@ -27,6 +27,13 @@
     $scope.clearNew = function() {
         $scope.newLink = null;
     };
+    $scope.delete = function (id, evt) {
+        evt.preventDefault();
+        if (confirm('Really delete link ' + id + '?')) {
+            $http.delete('links/' + id)
+                .success($scope.fetchLinks);
+        }
+    };
     
     $scope.fetchLinks();
 }

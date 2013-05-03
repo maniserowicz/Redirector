@@ -27,7 +27,7 @@
                 <button ng-click="clearNew()">Clear</button>
             </form>
             <ul>
-                <li ng-repeat="link in links">{{link.Alias}} ({{link.Visits.length}} visits)
+                <li ng-repeat="link in links">{{link.Alias}} ({{link.Visits.length}} visits) [<a href="#" ng-click="delete(link.Id, $event)">x</a>]
                     (<a target="_blank" href="r/{{link.Alias}}" ng-click="fetchLinks_delayed()">visit</a>)
                     (<a target="_blank" href="{{link.Target}}">open target</a>)
                 </li>
