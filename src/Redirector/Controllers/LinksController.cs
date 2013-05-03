@@ -55,5 +55,19 @@ namespace Procent.Redirector.API
                 return link;
             }
         }
+
+        public void Delete(string id)
+        {
+            using (var session = NewSession())
+            {
+                var link = session.Load<Link>(id);
+
+                if (link != null)
+                {
+                    session.Delete(link);
+                    session.SaveChanges();
+                }
+            }
+        }
     }
 }
