@@ -1,0 +1,3 @@
+[submodule "src/_external/WorldDomination.Web.Authentication"]
+	path = src/_external/WorldDomination.Web.Authentication
+	url = https://github.com/PureKrome/WorldDomination.Web.Authentication.git
