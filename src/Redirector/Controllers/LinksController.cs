@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace Procent.Redirector.API
 {
+    [Authorize]
     public class LinksController : RedirectorControllerBase
     {
         public IEnumerable<link_read_model> Get()
