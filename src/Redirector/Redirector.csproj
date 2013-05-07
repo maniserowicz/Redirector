@@ -132,7 +132,6 @@
     <Compile Include="App_Start\DI\SimpleContainer.cs" />
     <Compile Include="App_Start\RavenStore.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Configuration\RedirectorConfiguration.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinksController.cs" />
@@ -149,7 +148,6 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Content Include="Global.asax" />
-    <Content Include="redirector.config" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.min.js" />
@@ -505,13 +503,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <PropertyGroup>
-    <PreBuildEvent>powershell -file "$(ProjectDir)\fill-secrets.ps1"</PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

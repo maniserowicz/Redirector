@@ -2,7 +2,6 @@
 using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
-using Procent.Redirector.Configuration;
 using WorldDomination.Web.Authentication;
 using WorldDomination.Web.Authentication.Providers;
 using System.Linq;
@@ -17,8 +16,8 @@ namespace Procent.Redirector.Controllers
         {
             var googleProvider = new GoogleProvider(new ProviderParams()
                 {
-                    Key = RedirectorConfiguration.Value("Auth.Google.Key"),
-                    Secret = RedirectorConfiguration.Value("Auth.Google.Secret"),
+                    Key = ConfigurationManager.AppSettings["Auth.Google.Key"],
+                    Secret = ConfigurationManager.AppSettings["Auth.Google.Secret"]
                 });
             //googleProvider.DefaultAuthenticationServiceSettings.CallBackUri = new Uri("authentication/authenticatecallback?providerKey=Google", UriKind.Relative);
 
@@ -48,7 +47,7 @@ namespace Procent.Redirector.Controllers
             var authenticateServiceSettings = this._authenticationService.GetAuthenticateServiceSettings(providerKey, this.Request.Url);
             var authenticatedClient = _authenticationService.GetAuthenticatedClient(authenticateServiceSettings, Request.Params);
 
-            var allowedEmails = RedirectorConfiguration.Value("Auth.AllowedEmails").Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            var allowedEmails = ConfigurationManager.AppSettings["Auth.AllowedEmails"].Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             if (allowedEmails.Contains(authenticatedClient.UserInformation.Email))
             {
                 FormsAuthentication.SetAuthCookie(authenticatedClient.UserInformation.Email, false);
