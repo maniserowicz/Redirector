@@ -1,7 +1,7 @@
 #####################
 # Project-specific
 #####################
-secrets.txt
+secrets.xml
 src/Redirector/local.config
 src/Redirector/App_Data/
 
